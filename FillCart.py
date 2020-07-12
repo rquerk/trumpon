@@ -14,10 +14,7 @@ browserPath = str(Path.home()) + '/Downloads/geckodriver'
 uBlockPath = str(Path.home()) + '/.mozilla/firefox/naml3cvo.default-release/extensions/uBlock0@raymondhill.net.xpi'
     
 # start Adress
-address = 'https://shop.donaldjtrump.com'
-
-# cart address
-cart = 'https://shop.donaldjtrump.com/cart'
+address = ''
 
 # pass the pathes to the webdriver
 profile = webdriver.FirefoxProfile()
