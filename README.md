@@ -8,7 +8,7 @@ on a very simple way.
 It wont stop until an error occures. So the cart should become larger and larger.
 It works on shops that have various "articles" on thier main page, 
 and if you click one, you get forwarded to a page containing an "Add To Cart" Button.
-
+Dont forget to paste the shops web address in line 17 
   
 
 
