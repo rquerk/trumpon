@@ -54,7 +54,7 @@ if __name__ == "__main__":
     
     # iterator over product list
     i = 0
-    while :
+    while True:
         
         if i >= listlen: 
             i = 0
