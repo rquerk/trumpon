@@ -1,6 +1,8 @@
-# exploring selenium
-# idea from da news
-# ment for merge fans^^
+"""
+exploring selenium. The script is ment for merge fans^^
+products probably won't be reserved before you attempt to
+actually buy stuff.
+"""
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -13,66 +15,55 @@ import time
 browserPath = str(Path.home()) + '/Downloads/geckodriver' 
 uBlockPath = str(Path.home()) + '/.mozilla/firefox/naml3cvo.default-release/extensions/uBlock0@raymondhill.net.xpi'
     
-# start Adress
-address = ''
+address = 'https://shop.donaldjtrump.com'
 
-# pass the pathes to the webdriver
+# for the extension we need such profile
 profile = webdriver.FirefoxProfile()
 profile.add_extension(extension = uBlockPath)
 browser = webdriver.Firefox(executable_path = browserPath, firefox_profile = profile)
 
-class FillCart:
-    
-    #returning a list of "articles"
-    def getArticles(self):
-        productList = None
-        try:
-            productList = browser.find_elements_by_tag_name('article')
-        except Exception as e:
-            print("no article tag found: ", e.__class__)
+def getArticles():
+    productList = None
+    try:
+        productList = browser.find_elements_by_tag_name('article')
+    except Exception as e:
+        print("no article tag found: ", e.__class__)
             
-        return productList
+    return productList
     
-    def getItemListByTag(self, tag):
-        item = None
-        try:
-            item = browser.find_elements_by_tag_name(tag)
-        except Exception as e:
-            print("no {tag} tag found: ", e.__class__)
-            
-        return item
+def getItemListByTag(tag):
+    item = None
+    try:
+        item = browser.find_elements_by_tag_name(tag)
+    except Exception as e:
+        print("no {tag} tag found: ", e.__class__)
+        
+    return item
     
-    def addToCart(self):
-        AddToCart = browser.find_element_by_name('add');
-        # print(AddToCart.text)
-        AddToCart.click()
+def addToCart():
+    AddToCart = browser.find_element_by_name('add')
+    AddToCart.click()
         
 
 if __name__ == "__main__":
     
-    cartFiller = FillCart()
-    # load main page
     browser.get(address)
-    #using sleeps to implement waiting for page loading... not good i know
-    time.sleep(2)
     
-    productList = cartFiller.getArticles()
+    productList = getArticles()
     listlen = len(productList)
     
+    # iterator over product list
     i = 0
-    while True:
+    while :
         
-        if i >= listlen:
+        if i >= listlen: 
             i = 0
-        productList = cartFiller.getArticles()
+            
+        productList = getArticles()
         article = productList[i]
-        # print(article.text)
         article.click()
-        time.sleep(3)
-        cartFiller.addToCart()
-        time.sleep(3)
+        addToCart()
         browser.get(address)
-        time.sleep(3)
         
         i = i + 1
     
